@@ -28,6 +28,7 @@ public class ItemsEntity {
     private long AMOUNT;
 
     public ItemsEntity(){}
+
     public ItemsEntity(long ID){
         this.ID=ID;
     }
@@ -38,6 +39,8 @@ public class ItemsEntity {
         this.PRICE = PRICE;
         this.AMOUNT = AMOUNT;
     }
+
+
 
     public long getID() {
         return ID;

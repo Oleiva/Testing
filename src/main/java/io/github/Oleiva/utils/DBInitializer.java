@@ -8,6 +8,10 @@ package io.github.Oleiva.utils;
 
 //package io.github.oleiva.utils;
 
+import io.github.Oleiva.dao.ItemsDao;
+import io.github.Oleiva.entity.ItemsEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 
 //import io.github.oleiva.dao.UserDao;
@@ -25,6 +29,8 @@ public class DBInitializer {
 
 //	private NewsEntryDao newsEntryDao;
 //	private UserDao userDao;
+	@Autowired
+	private ItemsDao itemsDao;
 //	private PasswordEncoder passwordEncoder;
 
 
@@ -39,7 +45,7 @@ public class DBInitializer {
 //		this.newsEntryDao = newsEntryDao;
 //		this.passwordEncoder = passwordEncoder;
 //	}
-//
+
 
 
 
@@ -62,24 +68,21 @@ public class DBInitializer {
 //			timestamp += 1000 * 60 * 60;
 //		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
-}
+		public void initDataItems () {
+
+			String SKU = "dd";
+			String NAME = "dd";
+			long PRICE = 10000;
+			long AMOUNT = 3434;
+
+			ItemsEntity itemsEntity = new ItemsEntity(SKU,NAME,PRICE,AMOUNT);
+			System.out.println(itemsEntity);
+
+			this.itemsDao.saveAndFlush(itemsEntity);
+		}
+
+
+		}
+
+
