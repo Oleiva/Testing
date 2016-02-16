@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "ListOfItems")
+@Table(name = "ItemsEntity")
 public class ItemsEntity {
 
     @Id
