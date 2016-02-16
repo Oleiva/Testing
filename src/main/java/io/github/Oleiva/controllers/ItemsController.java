@@ -19,7 +19,7 @@ public class ItemsController  {
     @Autowired
     private ItemsDao itemsDao;
 
-    @RequestMapping(value="/",method = RequestMethod.GET)
+    @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
     public List<ItemsEntity> getAll() {
         return itemsDao.findAll();
