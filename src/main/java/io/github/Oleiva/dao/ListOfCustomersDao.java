@@ -1,11 +1,9 @@
 package io.github.Oleiva.dao;
 
-import io.github.Oleiva.entity.ListOfCustomersEntity;
+import io.github.Oleiva.entity.CustomersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Collection;
-import java.util.List;
 
-public interface ListOfCustomersDao  extends JpaRepository<ListOfCustomersEntity, Integer> {
+public interface ListOfCustomersDao  extends JpaRepository<CustomersEntity, Integer> {
 
 //    List<SubscriptionModel> findByIssueId(int issueId);
 //

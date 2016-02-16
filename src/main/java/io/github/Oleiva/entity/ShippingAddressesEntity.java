@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ListOfShippingAddresses")
-public class ListOfShippingAddressesEntity {
+public class ShippingAddressesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,13 +31,13 @@ public class ListOfShippingAddressesEntity {
     private int FLAT;
 
 
-    public ListOfShippingAddressesEntity(){}
+    public ShippingAddressesEntity(){}
 
-    public ListOfShippingAddressesEntity(long ID){
+    public ShippingAddressesEntity(long ID){
         this.ID = ID;
     }
 
-    public ListOfShippingAddressesEntity(long CUSTOMERID, int POSTALCODE, String STREET, int HOUSE, int FLAT) {
+    public ShippingAddressesEntity(long CUSTOMERID, int POSTALCODE, String STREET, int HOUSE, int FLAT) {
         this.CUSTOMERID = CUSTOMERID;
         this.POSTALCODE = POSTALCODE;
         this.STREET = STREET;

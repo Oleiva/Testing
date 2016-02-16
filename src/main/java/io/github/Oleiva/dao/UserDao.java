@@ -10,7 +10,7 @@
 //import org.springframework.stereotype.Repository;
 //
 ///**
-// * This class is used to access data for the ListOfCustomersEntity entity.
+// * This class is used to access data for the CustomersEntity entity.
 // * Repository annotation allows the component scanning support to find and
 // * configure the DAO wihtout any XML configuration and also provide the Spring
 // * exceptiom translation.

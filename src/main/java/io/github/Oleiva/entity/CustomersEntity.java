@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ListOfCustomers")
-public class ListOfCustomersEntity {
+public class CustomersEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,13 +24,13 @@ public class ListOfCustomersEntity {
 
     private long AVAILABLECREDIT;
 
-    public ListOfCustomersEntity(){}
+    public CustomersEntity(){}
 
-    public ListOfCustomersEntity(long ID) {
+    public CustomersEntity(long ID) {
         this.ID = ID;
     }
 
-    public ListOfCustomersEntity(String USERNAME, String EMAIL, long AVAILABLECREDIT) {
+    public CustomersEntity(String USERNAME, String EMAIL, long AVAILABLECREDIT) {
         this.USERNAME = USERNAME;
         this.EMAIL = EMAIL;
         this.AVAILABLECREDIT = AVAILABLECREDIT;

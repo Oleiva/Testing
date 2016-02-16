@@ -32,7 +32,7 @@
 //    catch (Exception ex) {
 //      return "Error creating the user: " + ex.toString();
 //    }
-//    return "ListOfCustomersEntity succesfully created!";
+//    return "CustomersEntity succesfully created!";
 //  }
 //
 //  /**
@@ -48,7 +48,7 @@
 //    catch (Exception ex) {
 //      return "Error deleting the user: " + ex.toString();
 //    }
-//    return "ListOfCustomersEntity succesfully deleted!";
+//    return "CustomersEntity succesfully deleted!";
 //  }
 //
 //  /**
@@ -63,7 +63,7 @@
 //      userId = String.valueOf(user.getId());
 //    }
 //    catch (Exception ex) {
-//      return "ListOfCustomersEntity not found: " + ex.toString();
+//      return "CustomersEntity not found: " + ex.toString();
 //    }
 //    return "The user id is: " + userId;
 //  }
@@ -83,7 +83,7 @@
 //    catch (Exception ex) {
 //      return "Error updating the user: " + ex.toString();
 //    }
-//    return "ListOfCustomersEntity succesfully updated!";
+//    return "CustomersEntity succesfully updated!";
 //  }
 //
 //  // ------------------------

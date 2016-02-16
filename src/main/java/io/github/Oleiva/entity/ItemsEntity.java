@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ListOfItems")
-public class ListOfItemsEntity {
+public class ItemsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +27,12 @@ public class ListOfItemsEntity {
 
     private long AMOUNT;
 
-    public ListOfItemsEntity(){}
-    public ListOfItemsEntity(long ID){
+    public ItemsEntity(){}
+    public ItemsEntity(long ID){
         this.ID=ID;
     }
 
-    public ListOfItemsEntity(String SKU, String NAME, long PRICE, long AMOUNT) {
+    public ItemsEntity(String SKU, String NAME, long PRICE, long AMOUNT) {
         this.SKU = SKU;
         this.NAME = NAME;
         this.PRICE = PRICE;

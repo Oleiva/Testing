@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ListOfOrders")
-public class ListOfOrdersEntity {
+public class OrdersEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,12 +30,12 @@ public class ListOfOrdersEntity {
     @NotNull
     private long AMOUNT;
 
-    public ListOfOrdersEntity(){}
-    public ListOfOrdersEntity(long ID){
+    public OrdersEntity(){}
+    public OrdersEntity(long ID){
         this.ID = ID;
     }
 
-    public ListOfOrdersEntity(long CUSTOMERID, long ADDRESSESID, String SKU, long AMOUNT) {
+    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String SKU, long AMOUNT) {
         this.CUSTOMERID = CUSTOMERID;
         this.ADDRESSESID = ADDRESSESID;
         this.SKU = SKU;
