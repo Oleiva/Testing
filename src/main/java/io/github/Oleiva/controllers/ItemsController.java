@@ -5,6 +5,7 @@ import io.github.Oleiva.dao.ItemsDao;
 //import io.github.Oleiva.dto.pojo.ResponseDTO;
 import io.github.Oleiva.entity.CustomersEntity;
 import io.github.Oleiva.entity.ItemsEntity;
+import org.apache.log4j.Logger;
 import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/items")
 public class ItemsController  {
+    public final Logger LOG = Logger.getLogger(this.getClass());
 
 
     @Autowired
@@ -28,26 +30,11 @@ public class ItemsController  {
     @RequestMapping(value="/get-by-id/{id}",method = RequestMethod.GET)
     @ResponseBody
     public ItemsEntity getById(@PathVariable long id) {
-//    String userId;
-        if (id ==0) {
-            System.out.print("bad idea");
+
+        if (itemsDao.findOne(id) == null) {
+            LOG.warn("Number of item  does not exist");
         }
         return itemsDao.findOne(id);
     }
-
-//    @RequestMapping(value="/get-by-id/{id}")
-//    @ResponseBody
-//    public List<ItemsEntity> getById(@PathVariable long id) {
-//
-//        List<ItemsEntity> ListOfItems = null;
-//        try {
-//            ListOfItems = (List<ItemsEntity>) itemsDao.findOne(id);
-//        } catch (Exception ex) {
-////            responseDTO.setMessage("Some problem occured! User was not added");
-//        }
-//
-//        return ListOfItems;
-//    }
-
 
 }

@@ -27,7 +27,7 @@ public class MainController {
   @ResponseBody
   public ResponsePojo index(ResponsePojo responsePojo) {
 
-    responsePojo.setMessage("Proudly handcrafted by \" + \"<a href='http://oleiva.github.io'>Ivasoft </a> :)\"");
+    responsePojo.setMessage("Proudly handcrafted by " + "<a href='http://oleiva.github.io'>Ivasoft </a> :)");
     return responsePojo;
   }
 
