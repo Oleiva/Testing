@@ -19,9 +19,11 @@ public class OrdersEntity {
     private long ID;
 
     @NotNull
+//    @Column(unique=true, name = "CUSTOMERID")
     private long CUSTOMERID;
 
     @NotNull
+//    @Column(unique=true, name = "ADDRESSESID")
     private long ADDRESSESID;
 
     @NotNull

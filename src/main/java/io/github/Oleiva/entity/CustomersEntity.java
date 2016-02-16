@@ -1,11 +1,7 @@
 package io.github.Oleiva.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 
 @Entity
@@ -20,6 +16,7 @@ public class CustomersEntity {
     private String USERNAME;
 
     @NotNull
+    @Column(unique=true, name = "EMAIL")
     private String EMAIL;
 
     private long AVAILABLECREDIT;
