@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "items")
+@Table(name = "ITEMS")
 public class ItemsEntity {
 
     @Id
@@ -13,11 +13,11 @@ public class ItemsEntity {
     private long ID;
 
     @NotNull
-    @Column(unique=true, name = "SKU")
-    private String SKU;
+    private String NAME;
 
     @NotNull
-    private String NAME;
+    @Column(unique=true, name = "SKU")
+    private String SKU;
 
     @NotNull
     private long PRICE;

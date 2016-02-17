@@ -30,6 +30,7 @@ public class ShippingAddressesEntity {
     @ManyToOne
     private CustomersEntity customersEntity;
 
+
     public CustomersEntity getCustomersEntity() {
         return customersEntity;
     }

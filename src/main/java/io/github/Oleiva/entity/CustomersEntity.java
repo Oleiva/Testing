@@ -6,7 +6,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "customers")
+@Table(name = "CUSTOMERS")
 public class CustomersEntity {
 
     @Id
@@ -20,6 +20,11 @@ public class CustomersEntity {
     @Column(unique=true, name = "EMAIL")
     private String EMAIL;
 
+    private long AVAILABLECREDIT;
+
+    @OneToMany(mappedBy = "ID" )
+    private List<ShippingAddressesEntity> shippingAddressesEntities;
+
     public List<ShippingAddressesEntity> getShippingAddressesEntities() {
         return shippingAddressesEntities;
     }
@@ -27,11 +32,6 @@ public class CustomersEntity {
     public void setShippingAddressesEntities(List<ShippingAddressesEntity> shippingAddressesEntities) {
         this.shippingAddressesEntities = shippingAddressesEntities;
     }
-
-    @OneToMany(mappedBy = "customersEntity" )
-    private List<ShippingAddressesEntity> shippingAddressesEntities;
-
-    private long AVAILABLECREDIT;
 
     public CustomersEntity(){}
 
