@@ -1,15 +1,11 @@
 package io.github.Oleiva.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "shippingaddresses")
+@Table(name = "SHIPPING_ADDRESSES")
 public class ShippingAddressesEntity {
 
     @Id
@@ -17,10 +13,10 @@ public class ShippingAddressesEntity {
     private long ID;
 
     @NotNull
-    private long CUSTOMERID;
+    private long CUSTOMER_ID;
 
     @NotNull
-    private int POSTALCODE;
+    private int POSTAL_CODE;
 
     @NotNull
     private String STREET;
@@ -30,6 +26,17 @@ public class ShippingAddressesEntity {
 
     private int FLAT;
 
+    @JoinColumn(name = "CUSTOMER_ID" ,insertable = false, updatable = false )
+    @ManyToOne
+    private CustomersEntity customersEntity;
+
+    public CustomersEntity getCustomersEntity() {
+        return customersEntity;
+    }
+
+    public void setCustomersEntity(CustomersEntity customersEntity) {
+        this.customersEntity = customersEntity;
+    }
 
     public ShippingAddressesEntity(){}
 
@@ -37,9 +44,9 @@ public class ShippingAddressesEntity {
         this.ID = ID;
     }
 
-    public ShippingAddressesEntity(long CUSTOMERID, int POSTALCODE, String STREET, int HOUSE, int FLAT) {
-        this.CUSTOMERID = CUSTOMERID;
-        this.POSTALCODE = POSTALCODE;
+    public ShippingAddressesEntity(long CUSTOMER_ID, int POSTAL_CODE, String STREET, int HOUSE, int FLAT) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
+        this.POSTAL_CODE = POSTAL_CODE;
         this.STREET = STREET;
         this.HOUSE = HOUSE;
         this.FLAT = FLAT;
@@ -54,20 +61,20 @@ public class ShippingAddressesEntity {
         this.ID = ID;
     }
 
-    public long getCUSTOMERID() {
-        return CUSTOMERID;
+    public long getCUSTOMER_ID() {
+        return CUSTOMER_ID;
     }
 
-    public void setCUSTOMERID(long CUSTOMERID) {
-        this.CUSTOMERID = CUSTOMERID;
+    public void setCUSTOMER_ID(long CUSTOMER_ID) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
     }
 
-    public int getPOSTALCODE() {
-        return POSTALCODE;
+    public int getPOSTAL_CODE() {
+        return POSTAL_CODE;
     }
 
-    public void setPOSTALCODE(int POSTALCODE) {
-        this.POSTALCODE = POSTALCODE;
+    public void setPOSTAL_CODE(int POSTAL_CODE) {
+        this.POSTAL_CODE = POSTAL_CODE;
     }
 
     public String getSTREET() {

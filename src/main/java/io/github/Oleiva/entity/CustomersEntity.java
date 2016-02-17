@@ -2,6 +2,7 @@ package io.github.Oleiva.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 @Entity
@@ -18,6 +19,17 @@ public class CustomersEntity {
     @NotNull
     @Column(unique=true, name = "EMAIL")
     private String EMAIL;
+
+    public List<ShippingAddressesEntity> getShippingAddressesEntities() {
+        return shippingAddressesEntities;
+    }
+
+    public void setShippingAddressesEntities(List<ShippingAddressesEntity> shippingAddressesEntities) {
+        this.shippingAddressesEntities = shippingAddressesEntities;
+    }
+
+    @OneToMany(mappedBy = "customersEntity" )
+    private List<ShippingAddressesEntity> shippingAddressesEntities;
 
     private long AVAILABLECREDIT;
 
