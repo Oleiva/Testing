@@ -8,10 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 public class OrdersEntity {
 
     @Id
@@ -27,7 +29,7 @@ public class OrdersEntity {
     private long ADDRESSESID;
 
     @NotNull
-    private String SKU;
+    private String ITEM_ID;
 
     @NotNull
 //    @Enumerated(EnumType.STRING)
@@ -41,10 +43,10 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String SKU, String STATUS, long AMOUNT) {
+    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String ITEM_ID, String STATUS, long AMOUNT) {
         this.CUSTOMERID = CUSTOMERID;
         this.ADDRESSESID = ADDRESSESID;
-        this.SKU = SKU;
+        this.ITEM_ID = ITEM_ID;
         this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
     }
@@ -73,12 +75,12 @@ public class OrdersEntity {
         this.ADDRESSESID = ADDRESSESID;
     }
 
-    public String getSKU() {
-        return SKU;
+    public String getITEM_ID() {
+        return ITEM_ID;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setITEM_ID(String ITEM_ID) {
+        this.ITEM_ID = ITEM_ID;
     }
 
     public long getAMOUNT() {
@@ -96,4 +98,5 @@ public class OrdersEntity {
     public void setSTATUS(String STATUS) {
         this.STATUS = STATUS;
     }
+
 }

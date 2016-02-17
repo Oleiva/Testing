@@ -2,6 +2,10 @@ package io.github.Oleiva.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -23,7 +27,7 @@ public class ItemsEntity {
     private long PRICE;
 
     private long AMOUNT;
-
+    
     public ItemsEntity(){}
 
     public ItemsEntity(long ID){
