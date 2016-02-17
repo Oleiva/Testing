@@ -30,6 +30,9 @@ public class OrdersEntity {
     private String SKU;
 
     @NotNull
+    private String STATUS;
+
+    @NotNull
     private long AMOUNT;
 
     public OrdersEntity(){}
@@ -37,10 +40,11 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String SKU, long AMOUNT) {
+    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String SKU, String STATUS, long AMOUNT) {
         this.CUSTOMERID = CUSTOMERID;
         this.ADDRESSESID = ADDRESSESID;
         this.SKU = SKU;
+        this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
     }
 
@@ -82,5 +86,13 @@ public class OrdersEntity {
 
     public void setAMOUNT(long AMOUNT) {
         this.AMOUNT = AMOUNT;
+    }
+
+    public String getSTATUS() {
+        return STATUS;
+    }
+
+    public void setSTATUS(String STATUS) {
+        this.STATUS = STATUS;
     }
 }
