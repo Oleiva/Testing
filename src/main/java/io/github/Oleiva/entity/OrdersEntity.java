@@ -30,6 +30,7 @@ public class OrdersEntity {
     private String SKU;
 
     @NotNull
+//    @Enumerated(EnumType.STRING)
     private String STATUS;
 
     @NotNull

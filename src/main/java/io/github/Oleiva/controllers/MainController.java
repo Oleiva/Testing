@@ -4,6 +4,7 @@ import io.github.Oleiva.dto.pojo.ResponsePojo;
 import io.github.Oleiva.services.CustomersService;
 import io.github.Oleiva.services.ItemsService;
 //import io.github.Oleiva.utils.DBInitializer;
+import io.github.Oleiva.services.OrdersService;
 import io.github.Oleiva.services.ShippingAddressesService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MainController {
 
   @Autowired
   private ShippingAddressesService shippingAddressesService;
+
+  @Autowired
+  private OrdersService ordersService;
 
 
 //  @Autowired
@@ -111,6 +115,17 @@ public class MainController {
     }
 
 
+    try{ /*Orders|-->   |long CUSTOMERID|long ADDRESSESID|String SKU|String STATUS|long AMOUNT|*/
+
+      ordersService.addOrder(10,20,"SKU","UP",5);
+
+
+      responsePojo.setMessage(responsePojo.getMessage()+" All orders added. ");
+
+    }catch (Exception ex) {
+      responsePojo.setMessage(responsePojo.getMessage()+" Orders were not added. Probably, they were added previously");
+      LOG.warn("LOG## Orders were not added. Probably, they were added previously ");
+    }
 
 
 
