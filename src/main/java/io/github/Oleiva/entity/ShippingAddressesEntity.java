@@ -26,18 +26,6 @@ public class ShippingAddressesEntity {
 
     private int FLAT;
 
-    @ManyToOne
-    @JoinColumn(name = "CUSTOMER_ID" ,insertable = false, updatable = false )
-    private CustomersEntity customersEntity;
-
-
-    public CustomersEntity getCustomersEntity() {
-        return customersEntity;
-    }
-
-    public void setCustomersEntity(CustomersEntity customersEntity) {
-        this.customersEntity = customersEntity;
-    }
 
     public ShippingAddressesEntity(){}
 

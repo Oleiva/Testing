@@ -61,7 +61,7 @@ public class MainController {
       itemsService.addItems("13005-1238-S", "notebook",61030,30);
       itemsService.addItems("10006-1239-S", "laptop",61032,30);
       itemsService.addItems("10404-1210-M", "board",61050,30);
-      itemsService.addItems("10051-1220-M", "marker",61500,30);
+      itemsService.addItems("10051-1220-M", "marker",999999999,30);
 
       responsePojo.setMessage("All items added");
 
@@ -101,6 +101,7 @@ public class MainController {
         shippingAddressesService.addItems(2,1785,"Paladin",14,258);
         shippingAddressesService.addItems(3,1256,"Zhilyanskaya",6, 21);
         shippingAddressesService.addItems(3,1498,"Kiev",58,258);
+
         shippingAddressesService.addItems(4,1955,"Chernigov",17,10);
         shippingAddressesService.addItems(5,14855,"Zhytomyr",58,8);
         shippingAddressesService.addItems(6,14098,"Academician Frolov",58,8);

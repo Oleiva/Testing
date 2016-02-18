@@ -20,7 +20,7 @@ public class CustomersEntity {
     @Column(unique=true, name = "EMAIL")
     private String EMAIL;
 
-    private long AVAILABLECREDIT;
+    private long AVAILABLE_CREDIT;
 
     @OneToMany(mappedBy = "ID" )
     private List<ShippingAddressesEntity> shippingAddressesEntities;
@@ -42,10 +42,10 @@ public class CustomersEntity {
         this.ID = ID;
     }
 
-    public CustomersEntity(String USERNAME, String EMAIL, long AVAILABLECREDIT) {
+    public CustomersEntity(String USERNAME, String EMAIL, long AVAILABLE_CREDIT) {
         this.USERNAME = USERNAME;
         this.EMAIL = EMAIL;
-        this.AVAILABLECREDIT = AVAILABLECREDIT;
+        this.AVAILABLE_CREDIT = AVAILABLE_CREDIT;
     }
 
     public long getID() {
@@ -72,11 +72,11 @@ public class CustomersEntity {
         this.EMAIL = EMAIL;
     }
 
-    public long getAVAILABLECREDIT() {
-        return AVAILABLECREDIT;
+    public long getAVAILABLE_CREDIT() {
+        return AVAILABLE_CREDIT;
     }
 
     public void setAVAILABLECREDIT(long AVAILABLECREDIT) {
-        this.AVAILABLECREDIT = AVAILABLECREDIT;
+        this.AVAILABLE_CREDIT = AVAILABLECREDIT;
     }
 }
