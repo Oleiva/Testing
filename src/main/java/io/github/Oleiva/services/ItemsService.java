@@ -7,7 +7,11 @@ public interface ItemsService {
 //
 //    public ItemsEntity addItem(String SKU, String NAME, long PRICE, long AMOUN);
 //    public ItemsEntity add(ItemsEntity items);
-    public ItemsEntity addItems(String SKU, String NAME, long PRICE, long AMOUN);
-    public long amountItemInStock(long id);
-    public void removeFromStock(long item, long amount);
+
+    ItemsEntity addItems(String SKU, String NAME, long PRICE, long AMOUN);
+    long amountItemInStock(long id);
+//    void removeFromCredit(long cust, long amount, long item);
+      void removeFromStock(long item, long amount);
+    public long getAnte(long item,long amount);
+
 }

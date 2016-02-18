@@ -33,13 +33,24 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
 
-    public boolean isEnoughMoney (long cust, long item, long amount){
-        boolean isEnoughMoney = false;
-       if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
-         isEnoughMoney = true;
-       }
-        return isEnoughMoney;
-    }
+//    public boolean isEnoughMoney (long cust, long item, long amount){
+//        boolean isEnoughMoney = false;
+//       if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
+//         isEnoughMoney = true;
+//       }
+//        return isEnoughMoney;
+//    }
+//
+//    @Override
+//    public void removeFromCredit(long cust, long amount?){
 
+//       long newCredit =  customersDao.findOne(cust).getAVAILABLE_CREDIT() - customersDao.findOne(cust)
+//               .getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ;
+
+    @Override
+    public void removeFromCredit(long cust, long ante){
+       long availCredit =  customersDao.findOne(cust).getAVAILABLE_CREDIT();
+        customersDao.findOne(cust).setAVAILABLECREDIT(availCredit - ante);
+    }
 
 }

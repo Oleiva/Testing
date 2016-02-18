@@ -21,16 +21,21 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsDao.saveAndFlush(itemsEntity);
     }
 
+    @Override
     public long amountItemInStock(long id){
       return   itemsDao.findOne(id).getAMOUNT();
 
     }
 
+    @Override
     public void removeFromStock(long item, long amount){
        long newAmount  = itemsDao.findOne(item).getAMOUNT()- amount;
        itemsDao.findOne(item).setAMOUNT(newAmount);
     }
 
+    public long getAnte(long item,long amount){
+        return (itemsDao.findOne(item).getPRICE()) * amount;
+    }
 
 
 }

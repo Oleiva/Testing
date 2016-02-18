@@ -117,13 +117,17 @@ public class OrdersController {
          if (swither == 3) {
              if ( itemsService.amountItemInStock(item)> amount ) {
 
-                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
+//                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
+                 long ante = itemsService.getAnte(item,amount);
+                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > ante ) {
 
-                     // В один этап, без резервирования
-                     // Отнять столько позиций
-                     // Отнять столко денег
-                     // Создать плетеж
+//                     В один этап, без резервирования  +
+//                     Отнять столько позиций           +
+//                     Отнять столко денег              +
+//                     Создать плетеж
+
                      itemsService.removeFromStock(item,amount);
+                     customersService.removeFromCredit(cust,ante);
 
 
 
