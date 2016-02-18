@@ -26,8 +26,8 @@ public class ShippingAddressesEntity {
 
     private int FLAT;
 
-    @JoinColumn(name = "CUSTOMER_ID" ,insertable = false, updatable = false )
     @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID" ,insertable = false, updatable = false )
     private CustomersEntity customersEntity;
 
 

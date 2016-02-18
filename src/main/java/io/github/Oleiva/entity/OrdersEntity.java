@@ -22,11 +22,11 @@ public class OrdersEntity {
 
     @NotNull
 //    @Column(unique=true, name = "CUSTOMERID")
-    private long CUSTOMERID;
+    private long CUSTOMER_ID;
 
     @NotNull
 //    @Column(unique=true, name = "ADDRESSESID")
-    private long ADDRESSESID;
+    private long ADDRESSES_ID;
 
     @NotNull
     private String ITEM_ID;
@@ -38,14 +38,18 @@ public class OrdersEntity {
     @NotNull
     private long AMOUNT;
 
+    @ManyToOne
+    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
+    public CustomersEntity getCustomers;
+
     public OrdersEntity(){}
     public OrdersEntity(long ID){
         this.ID = ID;
     }
 
-    public OrdersEntity(long CUSTOMERID, long ADDRESSESID, String ITEM_ID, String STATUS, long AMOUNT) {
-        this.CUSTOMERID = CUSTOMERID;
-        this.ADDRESSESID = ADDRESSESID;
+    public OrdersEntity(long CUSTOMER_ID, long ADDRESSES_ID, String ITEM_ID, String STATUS, long AMOUNT) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
+        this.ADDRESSES_ID = ADDRESSES_ID;
         this.ITEM_ID = ITEM_ID;
         this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
@@ -59,20 +63,28 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public long getCUSTOMERID() {
-        return CUSTOMERID;
+    public long getCUSTOMER_ID() {
+        return CUSTOMER_ID;
     }
 
-    public void setCUSTOMERID(long CUSTOMERID) {
-        this.CUSTOMERID = CUSTOMERID;
+    public void setCUSTOMER_ID(long CUSTOMER_ID) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
     }
 
-    public long getADDRESSESID() {
-        return ADDRESSESID;
+    public long getADDRESSES_ID() {
+        return ADDRESSES_ID;
     }
 
-    public void setADDRESSESID(long ADDRESSESID) {
-        this.ADDRESSESID = ADDRESSESID;
+    public void setADDRESSES_ID(long ADDRESSES_ID) {
+        this.ADDRESSES_ID = ADDRESSES_ID;
+    }
+
+    public CustomersEntity getGetCustomers() {
+        return getCustomers;
+    }
+
+    public void setGetCustomers(CustomersEntity getCustomers) {
+        this.getCustomers = getCustomers;
     }
 
     public String getITEM_ID() {

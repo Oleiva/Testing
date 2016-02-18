@@ -27,7 +27,7 @@ public class ItemsEntity {
     private long PRICE;
 
     private long AMOUNT;
-    
+
     public ItemsEntity(){}
 
     public ItemsEntity(long ID){

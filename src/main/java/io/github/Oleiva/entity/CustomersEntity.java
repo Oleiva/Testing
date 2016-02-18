@@ -25,6 +25,9 @@ public class CustomersEntity {
     @OneToMany(mappedBy = "ID" )
     private List<ShippingAddressesEntity> shippingAddressesEntities;
 
+    @OneToMany(mappedBy = "ID")
+    private List<OrdersEntity> ordersEntities;
+
     public List<ShippingAddressesEntity> getShippingAddressesEntities() {
         return shippingAddressesEntities;
     }
