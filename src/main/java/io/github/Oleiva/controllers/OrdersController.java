@@ -134,7 +134,8 @@ public class OrdersController {
                      customersService.removeFromCredit(cust,ante);
 //                                          |long      |long       |String |String|long  |
 //                                          |CUSTOMERID|ADDRESSESID|SKU    |STATUS|AMOUNT|
-                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
+//                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
+                     ordersService.addNewOrder(cust,adress,item,"STATUS_OK",amount);
 
 
 
@@ -158,7 +159,7 @@ public class OrdersController {
          }
 
      }catch (Exception ex){
-         responsePojo.setMessage(responsePojo.getMessage()+"Exeption swit ");
+         responsePojo.setMessage(responsePojo.getMessage()+"Exeption swither ");
      }
 
 //        responsePojo.setMessage("OK");

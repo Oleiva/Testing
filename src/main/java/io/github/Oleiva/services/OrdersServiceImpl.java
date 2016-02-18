@@ -19,8 +19,10 @@ public class OrdersServiceImpl implements OrdersService {
    @Autowired
 //    private ItemsDao itemsDao;
     private OrdersDao ordersDao;
+//@Autowired
+    private OrdersEntity ordersEntity;
 
-    @Override
+//    @Override
 //    public ShippingAddressesEntity addItems(long CUSTOMERID, int POSTALCODE, String STREET, int HOUSE, int FLAT){
 //        ShippingAddressesEntity shippingAddressesEntity = new ShippingAddressesEntity( CUSTOMERID,POSTALCODE,  STREET, HOUSE, FLAT);
 //
@@ -28,10 +30,20 @@ public class OrdersServiceImpl implements OrdersService {
 //        return shippingAddressesDao.saveAndFlush(shippingAddressesEntity);
 //
 
-      public OrdersEntity addOrder(long customerId, long addressesId, long itemId, String status, long amount){
+//      public OrdersEntity addOrder(long customerId, long addressesId, long itemId, String status, long amount){
+//
+//        OrdersEntity ordersEntity = new OrdersEntity(customerId, addressesId,  itemId,  status,  amount);
+////        OrdersEntity ordersEntity = new OrdersEntity(customerId, addressesId, itemId,  status,  amount);
+//        return  ordersDao.saveAndFlush(ordersEntity);
+//    }
 
-        OrdersEntity ordersEntity = new OrdersEntity(customerId, addressesId,  itemId,  status,  amount);
-//        OrdersEntity ordersEntity = new OrdersEntity(customerId, addressesId, itemId,  status,  amount);
+    @Override
+    public OrdersEntity addNewOrder(long customerId, long addressesId, long itemId, String status, long amount){
+//        long newOrderId = ordersDao.
+        long newOrderId =100;
+        OrdersEntity ordersEntity = new OrdersEntity(newOrderId, customerId, addressesId,  itemId,  status,  amount);
+
+        ordersEntity.setORDER_ID(newOrderId);
         return  ordersDao.saveAndFlush(ordersEntity);
     }
 

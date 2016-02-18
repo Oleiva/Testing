@@ -21,6 +21,18 @@ public class OrdersEntity {
     private long ID;
 
     @NotNull
+    private long ORDER_ID;
+
+
+    public long getORDER_ID() {
+        return ORDER_ID;
+    }
+
+    public void setORDER_ID(long ORDER_ID) {
+        this.ORDER_ID = ORDER_ID;
+    }
+
+    @NotNull
 //    @Column(unique=true, name = "CUSTOMERID")
     private long CUSTOMER_ID;
 
@@ -47,7 +59,8 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public OrdersEntity(long CUSTOMER_ID, long ADDRESSES_ID,long ITEM_ID, String STATUS, long AMOUNT) {
+    public OrdersEntity(long ORDER_ID, long CUSTOMER_ID, long ADDRESSES_ID, long ITEM_ID, String STATUS, long AMOUNT) {
+        this.ORDER_ID = ORDER_ID;
         this.CUSTOMER_ID = CUSTOMER_ID;
         this.ADDRESSES_ID = ADDRESSES_ID;
         this.ITEM_ID = ITEM_ID;
