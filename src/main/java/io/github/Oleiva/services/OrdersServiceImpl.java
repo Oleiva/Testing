@@ -47,6 +47,7 @@ public class OrdersServiceImpl implements OrdersService {
         try {
             indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getORDER_ID() +1;
         }catch (Exception e){
+            indexOfID = 1; //if table do not exist --> exception
         }
 
         LOG.info("## indexOfID"+indexOfID);
