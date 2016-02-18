@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface OrdersDao  extends JpaRepository<OrdersEntity, Long> {
 
-    @Query(value = findLastIndex,nativeQuery = true)  long  findLastIndex();
-    String findLastIndex = "SELECT max(id) FROM ORDERS";
-
+    @Query(value = findLastIndex, nativeQuery = true)  long  findLastIndex();
+    String findLastIndex = "SELECT max(id) FROM orders";
+//    String findLastIndex = "SELECT max(order_id) FROM orders";
 
 }

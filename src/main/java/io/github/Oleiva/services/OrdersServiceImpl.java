@@ -4,6 +4,7 @@ import io.github.Oleiva.dao.OrdersDao;
 import io.github.Oleiva.dao.ShippingAddressesDao;
 import io.github.Oleiva.entity.OrdersEntity;
 import io.github.Oleiva.entity.ShippingAddressesEntity;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class OrdersServiceImpl implements OrdersService {
+    public final Logger LOG = Logger.getLogger(this.getClass());
 
    @Autowired
 //    private ItemsDao itemsDao;
@@ -39,11 +41,16 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public OrdersEntity addNewOrder(long customerId, long addressesId, long itemId, String status, long amount){
-//        long newOrderId = ordersDao.
-        long newOrderId =100;
-        OrdersEntity ordersEntity = new OrdersEntity(newOrderId, customerId, addressesId,  itemId,  status,  amount);
 
-        ordersEntity.setORDER_ID(newOrderId);
+        long indexOfID;
+
+        try {
+            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getORDER_ID() +1;
+        }catch (Exception e){
+        }
+
+        LOG.info("## indexOfID"+indexOfID);
+        OrdersEntity ordersEntity = new OrdersEntity(indexOfID, customerId, addressesId,  itemId,  status,  amount);
         return  ordersDao.saveAndFlush(ordersEntity);
     }
 

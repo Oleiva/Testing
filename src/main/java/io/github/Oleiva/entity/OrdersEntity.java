@@ -50,9 +50,9 @@ public class OrdersEntity {
     @NotNull
     private long AMOUNT;
 
-    @ManyToOne
-    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
-    public CustomersEntity getCustomers;
+//    @ManyToOne
+//    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
+//    public CustomersEntity getCustomers;
 
     public OrdersEntity(){}
     public OrdersEntity(long ID){
@@ -67,6 +67,8 @@ public class OrdersEntity {
         this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
     }
+
+
 
     public long getID() {
         return ID;
@@ -90,14 +92,6 @@ public class OrdersEntity {
 
     public void setADDRESSES_ID(long ADDRESSES_ID) {
         this.ADDRESSES_ID = ADDRESSES_ID;
-    }
-
-    public CustomersEntity getGetCustomers() {
-        return getCustomers;
-    }
-
-    public void setGetCustomers(CustomersEntity getCustomers) {
-        this.getCustomers = getCustomers;
     }
 
     public long getITEM_ID() {

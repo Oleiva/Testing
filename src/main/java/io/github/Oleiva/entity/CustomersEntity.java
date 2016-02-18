@@ -22,19 +22,11 @@ public class CustomersEntity {
 
     private long AVAILABLE_CREDIT;
 
-    @OneToMany(mappedBy = "ID" )
-    private List<ShippingAddressesEntity> shippingAddressesEntities;
-
-    @OneToMany(mappedBy = "ID")
-    private List<OrdersEntity> ordersEntities;
-
-    public List<ShippingAddressesEntity> getShippingAddressesEntities() {
-        return shippingAddressesEntities;
-    }
-
-    public void setShippingAddressesEntities(List<ShippingAddressesEntity> shippingAddressesEntities) {
-        this.shippingAddressesEntities = shippingAddressesEntities;
-    }
+//    @OneToMany(mappedBy = "ID" )
+//    private List<ShippingAddressesEntity> shippingAddressesEntities;
+//
+//    @OneToMany(mappedBy = "ID")
+//    private List<OrdersEntity> ordersEntities;
 
     public CustomersEntity(){}
 
