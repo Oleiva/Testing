@@ -118,7 +118,7 @@ public class MainController {
 
     try{ /*Orders|-->   |long CUSTOMERID|long ADDRESSESID|String SKU|String STATUS|long AMOUNT|*/
 
-      ordersService.addOrder(10,20,"SKU","UP",5);
+//      ordersService.addOrder(10,20,"SKU","UP",5);
 
 
       responsePojo.setMessage(responsePojo.getMessage()+" All orders added. ");

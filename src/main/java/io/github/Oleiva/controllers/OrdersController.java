@@ -11,6 +11,7 @@ import io.github.Oleiva.entity.OrdersEntity;
 import io.github.Oleiva.entity.ShippingAddressesEntity;
 import io.github.Oleiva.services.CustomersService;
 import io.github.Oleiva.services.ItemsService;
+import io.github.Oleiva.services.OrdersService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,9 @@ public class OrdersController {
 
     @Autowired
     private CustomersService customersService;
+
+    @Autowired
+    private OrdersService ordersService;
 
 
     @RequestMapping(value="",method = RequestMethod.GET)
@@ -115,7 +119,7 @@ public class OrdersController {
 
      try{
          if (swither == 3) {
-             if ( itemsService.amountItemInStock(item)> amount ) {
+             if ( itemsService.amountItemInStock(item)>= amount ) {
 
 //                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
                  long ante = itemsService.getAnte(item,amount);
@@ -128,6 +132,10 @@ public class OrdersController {
 
                      itemsService.removeFromStock(item,amount);
                      customersService.removeFromCredit(cust,ante);
+//                                          |long      |long       |String |String|long  |
+//                                          |CUSTOMERID|ADDRESSESID|SKU    |STATUS|AMOUNT|
+                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
+
 
 
 
@@ -150,7 +158,7 @@ public class OrdersController {
          }
 
      }catch (Exception ex){
-         responsePojo.setMessage("Exeption swit "+responsePojo.getMessage());
+         responsePojo.setMessage(responsePojo.getMessage()+"Exeption swit ");
      }
 
 //        responsePojo.setMessage("OK");

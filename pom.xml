@@ -36,6 +36,14 @@
       <!--<version>2.7.1</version>-->
     <!--</dependency>-->
 
+    <!--MariaDB-->
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>1.3.5</version>
+    </dependency>
+
+
   </dependencies>
 
   <properties>

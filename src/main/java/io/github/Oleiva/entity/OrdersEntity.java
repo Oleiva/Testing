@@ -29,7 +29,7 @@ public class OrdersEntity {
     private long ADDRESSES_ID;
 
     @NotNull
-    private String ITEM_ID;
+    private long ITEM_ID;
 
     @NotNull
 //    @Enumerated(EnumType.STRING)
@@ -47,7 +47,7 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public OrdersEntity(long CUSTOMER_ID, long ADDRESSES_ID, String ITEM_ID, String STATUS, long AMOUNT) {
+    public OrdersEntity(long CUSTOMER_ID, long ADDRESSES_ID,long ITEM_ID, String STATUS, long AMOUNT) {
         this.CUSTOMER_ID = CUSTOMER_ID;
         this.ADDRESSES_ID = ADDRESSES_ID;
         this.ITEM_ID = ITEM_ID;
@@ -87,11 +87,11 @@ public class OrdersEntity {
         this.getCustomers = getCustomers;
     }
 
-    public String getITEM_ID() {
+    public long getITEM_ID() {
         return ITEM_ID;
     }
 
-    public void setITEM_ID(String ITEM_ID) {
+    public void setITEM_ID(long ITEM_ID) {
         this.ITEM_ID = ITEM_ID;
     }
 
