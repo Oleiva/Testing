@@ -15,8 +15,11 @@ import java.util.List;
 public interface OrdersDao  extends JpaRepository<OrdersEntity, Long> {
 
 
-//    http://stackoverflow.com/questions/23456197/spring-data-jpa-repository-underscore-on-entity-column-name/23475349#23475349
+
+
+    //    http://stackoverflow.com/questions/23456197/spring-data-jpa-repository-underscore-on-entity-column-name/23475349#23475349
     Collection<OrdersEntity> findByOrderId(long order);
+
 
 
 //    List<OrdersEntity> findByORDER_ID(long ORDER_ID);
@@ -27,6 +30,8 @@ public interface OrdersDao  extends JpaRepository<OrdersEntity, Long> {
 //    List <OrdersEntity> findByOrderId (long ORDER_ID);
 //    List <OrdersEntity> findByAmount (long amount);
 
+    @Query(value = findLastIndex, nativeQuery = true)  long  findCustomerByOrder(long order);
+    String ww = "SELECT max(orderId) FROM orders where id = order";
 
 
     @Query(value = findLastIndex, nativeQuery = true)  long  findLastIndex();

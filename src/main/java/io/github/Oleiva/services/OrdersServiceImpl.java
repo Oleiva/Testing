@@ -1,16 +1,13 @@
 package io.github.Oleiva.services;
 
 import io.github.Oleiva.dao.OrdersDao;
-import io.github.Oleiva.dao.ShippingAddressesDao;
 import io.github.Oleiva.entity.OrdersEntity;
-import io.github.Oleiva.entity.ShippingAddressesEntity;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by OleIva on 17.02.2016.
@@ -79,6 +76,25 @@ public class OrdersServiceImpl implements OrdersService {
     public Collection<OrdersEntity> showOrder(long orderId){
       return   ordersDao.findByOrderId(orderId);
     }
+
+
+//    public OrderPojo showRightOrder(long orderId){
+//
+//
+//        return orderPoj
+//    }
+
+    @Override
+    public long getOrderId(long order){
+      return ordersDao.findOne(order).getOrderId();
+    }
+
+    public long getCustomerIdFromOrder(long order){
+      long id =  Integer.parseInt(ordersDao.findByOrderId(order).toString()) ;
+        return id;
+    }
+
+
 
 
 }

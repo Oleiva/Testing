@@ -53,4 +53,7 @@ public class CustomersServiceImpl implements CustomersService {
         customersDao.findOne(cust).setAVAILABLECREDIT(availCredit - ante);
     }
 
+//    public long getCustomerId(){
+//        customersDao.
+//    }
 }

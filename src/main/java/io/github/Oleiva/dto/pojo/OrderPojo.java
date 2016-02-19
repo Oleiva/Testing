@@ -11,4 +11,11 @@ public class OrderPojo {
 
     private List<OrdersEntity> orders;
 
+    public List<OrdersEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrdersEntity> orders) {
+        this.orders = orders;
+    }
 }
