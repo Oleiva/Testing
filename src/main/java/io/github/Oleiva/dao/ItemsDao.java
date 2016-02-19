@@ -11,13 +11,4 @@ import java.util.List;
 public interface ItemsDao  extends JpaRepository<ItemsEntity, Long> {
 
 
-
-//    List<SubscriptionModel> findByIssueId(int issueId);
-//
-//    SubscriptionModel findByIssueIdAndUserId(int issueId, int userId);
-//
-//    Collection <SubscriptionModel> findByIssueIdAndIsValid(int issueId, int isValid);
-
-
-
 }

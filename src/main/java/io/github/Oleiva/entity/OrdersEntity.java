@@ -21,7 +21,6 @@ public class OrdersEntity {
     private long ID;
 
     @NotNull
-//    private long ORDER_ID;
     private long orderId;
 
     public long getOrderId() {
@@ -32,27 +31,17 @@ public class OrdersEntity {
         this.orderId = orderId;
     }
 
-    //    public long getORDER_ID() {
-//        return ORDER_ID;
-//    }
-//
-//    public void setORDER_ID(long ORDER_ID) {
-//        this.ORDER_ID = ORDER_ID;
-//    }
 
     @NotNull
-//    @Column(unique=true, name = "CUSTOMERID")
     private long CUSTOMER_ID;
 
     @NotNull
-//    @Column(unique=true, name = "ADDRESSESID")
     private long ADDRESSES_ID;
 
     @NotNull
     private long ITEM_ID;
 
     @NotNull
-//    @Enumerated(EnumType.STRING)
     private String STATUS;
 
     @NotNull
@@ -75,7 +64,6 @@ public class OrdersEntity {
         this.STATUS = STATUS;
         this.AMOUNT = AMOUNT;
     }
-
 
 
     public long getID() {
