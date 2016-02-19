@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * Created by OleIva on 17.02.2016.
  */
@@ -45,7 +48,7 @@ public class OrdersServiceImpl implements OrdersService {
         long indexOfID;
 
         try {
-            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getORDER_ID() +1;
+            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getOrderId() +1;
         }catch (Exception e){
             indexOfID = 1; //if table do not exist --> exception
         }
@@ -54,5 +57,27 @@ public class OrdersServiceImpl implements OrdersService {
         OrdersEntity ordersEntity = new OrdersEntity(indexOfID, customerId, addressesId,  itemId,  status,  amount);
         return  ordersDao.saveAndFlush(ordersEntity);
     }
+
+
+    public OrdersEntity addItemToOrder(long order, long itemId, long amount){
+
+
+        long indexOfID;
+
+        try {
+            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getOrderId() +1;
+        }catch (Exception e){
+            indexOfID = 1; //if table do not exist --> exception
+        }
+
+        LOG.info("## indexOfID"+indexOfID);
+//        OrdersEntity ordersEntity = new OrdersEntity(indexOfID, customerId, addressesId,  itemId,  status,  amount);
+        return  ordersDao.saveAndFlush(ordersEntity);
+    }
+
+    public Collection<OrdersEntity> showOrder(long orderId){
+      return   ordersDao.findByOrderId(orderId);
+    }
+
 
 }

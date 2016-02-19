@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -68,6 +69,15 @@ public class OrdersController {
         return ordersDao.findOne(id);
     }
 
+    @RequestMapping(value="/get-by-order/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<OrdersEntity> getByOrderId(@PathVariable long id) {
+
+        if (ordersDao.findOne(id) == null) {
+            LOG.warn("Number of orders does not exist");
+        }
+        return ordersDao.findByOrderId(id);
+    }
 
 
 
@@ -137,14 +147,7 @@ public class OrdersController {
 //                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
                      ordersService.addNewOrder(cust,adress,item,"STATUS_OK",amount);
 
-
-
-
-
-
                      responsePojo.setMessage("AlL OK. Try to bay");
-
-
                  }else {
                      LOG.info("There is not enough money");
                      responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");
