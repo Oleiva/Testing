@@ -5,12 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ListOfCustomersDao  extends JpaRepository<CustomersEntity, Long> {
 
-//    List<SubscriptionModel> findByIssueId(int issueId);
-//
-//    SubscriptionModel findByIssueIdAndUserId(int issueId, int userId);
-//
-//    Collection <SubscriptionModel> findByIssueIdAndIsValid(int issueId, int isValid);
-
-
 
 }

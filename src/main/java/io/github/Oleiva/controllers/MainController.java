@@ -120,34 +120,12 @@ public class MainController {
 
 //      ordersService.addOrder(10,20,"SKU","UP",5);
 
-
       responsePojo.setMessage(responsePojo.getMessage()+" All orders added. ");
 
     }catch (Exception ex) {
       responsePojo.setMessage(responsePojo.getMessage()+" Orders were not added. Probably, they were added previously");
       LOG.warn("LOG## Orders were not added. Probably, they were added previously ");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return responsePojo;
 
