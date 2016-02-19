@@ -69,6 +69,8 @@ public class OrdersController {
         return ordersDao.findOne(id);
     }
 
+/// Get by ORder
+
     @RequestMapping(value="/get-by-order/{id}",method = RequestMethod.GET)
     @ResponseBody
     public Collection<OrdersEntity> getByOrderId(@PathVariable long id) {
@@ -76,9 +78,9 @@ public class OrdersController {
         if (ordersDao.findOne(id) == null) {
             LOG.warn("Number of orders does not exist");
         }
-        return ordersDao.findByOrderId(id);
+//        return ordersDao.findByOrderId(id);
+        return ordersService.showOrder(id);
     }
-
 
 
     @RequestMapping(value="/add-new/{cust}/{adress}/{item}/{amount}",method = RequestMethod.POST)

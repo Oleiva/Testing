@@ -75,6 +75,7 @@ public class OrdersServiceImpl implements OrdersService {
         return  ordersDao.saveAndFlush(ordersEntity);
     }
 
+@Override
     public Collection<OrdersEntity> showOrder(long orderId){
       return   ordersDao.findByOrderId(orderId);
     }
