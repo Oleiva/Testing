@@ -46,22 +46,26 @@ public class OrdersServiceImpl implements OrdersService {
 //
 //
 //    @Override
-//        public void addNewOrder(long customerId, long addressesId, long itemId, String status, long amount){
-//
-//        // Проверки выполнены, нужно покупать
-//
-//        OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
-//        long orderId = ordersEntity.getID();
-//        ordersDao.saveAndFlush(ordersEntity);
-//
-//
-////        long orderId, long itemId, long amount
-//
-//        TransactionsEntity transactionsEntity = new TransactionsEntity(orderId, itemId, amount);
-//        transactionsDao.saveAndFlush(transactionsEntity);
-//
-//
-//    }
+        public void addNewOrder(long customerId, long addressesId, long itemId, long amount){
+
+        // Проверки выполнены, нужно покупать
+
+        OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
+
+//        LOG.warn("## orderId" +orderId);
+        ordersDao.saveAndFlush(ordersEntity);
+        long orderId = ordersEntity.getID();
+
+        LOG.warn("## orderId = "+ orderId);
+
+
+//        long orderId, long itemId, long amount
+
+        TransactionsEntity transactionsEntity = new TransactionsEntity(orderId, itemId, amount);
+        transactionsDao.saveAndFlush(transactionsEntity);
+
+
+    }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    @Override

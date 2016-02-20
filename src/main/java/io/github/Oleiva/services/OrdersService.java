@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface OrdersService {
 
-//    void addNewOrder(long customerId, long addressesId, long itemId, String status, long amount);
+    void addNewOrder(long customerId, long addressesId, long itemId, long amount);
 
 //    OrdersEntity addNewsOrder(long customerId, long addressesId, long itemId, String status, long amount);
 

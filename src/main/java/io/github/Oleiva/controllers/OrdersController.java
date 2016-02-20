@@ -148,7 +148,7 @@ public class OrdersController {
 //                                          |CUSTOMERID|ADDRESSESID|SKU    |STATUS|AMOUNT|
 //                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
 
-//                     ordersService.addNewOrder(cust,adress,item,"STATUS_OK",amount);
+                     ordersService.addNewOrder(cust,adress,item,amount);
 
                      responsePojo.setMessage("AlL OK. Try to bay");
 
