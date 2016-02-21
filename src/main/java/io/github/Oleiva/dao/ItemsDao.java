@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import io.github.Oleiva.entity.CustomersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ItemsDao  extends JpaRepository<ItemsEntity, Long> {
+
 
 
 }

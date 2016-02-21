@@ -2,6 +2,7 @@ package io.github.Oleiva.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Created by OleIva on 19.02.2016.
@@ -15,6 +16,7 @@ public class TransactionsEntity {
     private long ID;
 
     @NotNull
+
     private long orderId;
 
     @NotNull
@@ -30,6 +32,20 @@ public class TransactionsEntity {
         this.itemId = itemId;
         this.amount = amount;
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY,optional=true)
+    @JoinColumn(name="orderId", nullable=false,insertable = false,updatable = false)
+    private OrdersEntity ordersEntity;
+
+//    public OrdersEntity getOrdersEntity() {
+//        return ordersEntity;
+//    }
+
+//    @OneToMany(mappedBy = "itemsEntity")
+//    private Set<ItemsEntity> itemsEntitySet;
+
+
 
     public long getID() {
         return ID;

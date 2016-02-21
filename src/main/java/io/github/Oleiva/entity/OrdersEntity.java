@@ -21,31 +21,18 @@ public class OrdersEntity {
     private long ID;
 
     @NotNull
-    private long orderId;
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-
-    @NotNull
     private long CUSTOMER_ID;
 
     @NotNull
     private long ADDRESSES_ID;
 
     @NotNull
-    private long ITEM_ID;
-
-    @NotNull
     private String STATUS;
 
-    @NotNull
-    private long AMOUNT;
+//    @OneToMany(mappedBy = "ordersEntity",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ordersEntity",fetch = FetchType.EAGER)
+    private Set<TransactionsEntity> getTransaction;
+
 
 //    @ManyToOne
 //    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
@@ -56,14 +43,12 @@ public class OrdersEntity {
         this.ID = ID;
     }
 
-    public OrdersEntity(long orderId, long CUSTOMER_ID, long ADDRESSES_ID, long ITEM_ID, String STATUS, long AMOUNT) {
-        this.orderId = orderId;
+    public OrdersEntity(long CUSTOMER_ID, long ADDRESSES_ID, String STATUS) {
         this.CUSTOMER_ID = CUSTOMER_ID;
         this.ADDRESSES_ID = ADDRESSES_ID;
-        this.ITEM_ID = ITEM_ID;
         this.STATUS = STATUS;
-        this.AMOUNT = AMOUNT;
     }
+
 
 
     public long getID() {
@@ -88,22 +73,6 @@ public class OrdersEntity {
 
     public void setADDRESSES_ID(long ADDRESSES_ID) {
         this.ADDRESSES_ID = ADDRESSES_ID;
-    }
-
-    public long getITEM_ID() {
-        return ITEM_ID;
-    }
-
-    public void setITEM_ID(long ITEM_ID) {
-        this.ITEM_ID = ITEM_ID;
-    }
-
-    public long getAMOUNT() {
-        return AMOUNT;
-    }
-
-    public void setAMOUNT(long AMOUNT) {
-        this.AMOUNT = AMOUNT;
     }
 
     public String getSTATUS() {

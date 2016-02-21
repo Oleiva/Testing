@@ -115,17 +115,17 @@ public class MainController {
       LOG.warn("LOG## ShippingAddresses were not added. Probably, they were added previously ");
     }
 
-
-    try{ /*Orders|-->   |long CUSTOMERID|long ADDRESSESID|String SKU|String STATUS|long AMOUNT|*/
-
-//      ordersService.addOrder(10,20,"SKU","UP",5);
-
-      responsePojo.setMessage(responsePojo.getMessage()+" All orders added. ");
-
-    }catch (Exception ex) {
-      responsePojo.setMessage(responsePojo.getMessage()+" Orders were not added. Probably, they were added previously");
-      LOG.warn("LOG## Orders were not added. Probably, they were added previously ");
-    }
+//
+//    try{ /*Orders|-->   |long CUSTOMERID|long ADDRESSESID|String SKU|String STATUS|long AMOUNT|*/
+//
+////      ordersService.addOrder(10,20,"SKU","UP",5);
+//
+//      responsePojo.setMessage(responsePojo.getMessage()+" All orders added. ");
+//
+//    }catch (Exception ex) {
+//      responsePojo.setMessage(responsePojo.getMessage()+" Orders were not added. Probably, they were added previously");
+//      LOG.warn("LOG## Orders were not added. Probably, they were added previously ");
+//    }
 
     return responsePojo;
 
