@@ -92,8 +92,8 @@ public class OrdersController {
                 itemsIdList.add(el.getItemId());
                 amountList.add(el.getAmount());
 
-                LOG.warn("itemsIdList"+itemsIdList);
-                LOG.warn("amountList"+amountList);
+                LOG.info("itemsIdList" + itemsIdList);
+                LOG.info("amountList" + amountList);
             }
 
             for(int i=0;i<itemsIdList.size();i++){
@@ -181,7 +181,7 @@ public class OrdersController {
 
 
 
-                        responsePojo.setMessage("AlL OK. Try to bay");
+                        responsePojo.setMessage("All present and correct. Thank you for your purchase");
                     }else {
                         LOG.info("There is not enough money");
                         responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");

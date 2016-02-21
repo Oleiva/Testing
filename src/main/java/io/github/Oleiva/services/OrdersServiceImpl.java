@@ -36,7 +36,7 @@ public class OrdersServiceImpl implements OrdersService {
         ordersDao.saveAndFlush(ordersEntity);
         long orderId = ordersEntity.getID();
 
-        LOG.warn("## orderId = "+ orderId);
+        LOG.info("## orderId = "+ orderId);
 
 
 //        long orderId, long itemId, long amount
@@ -142,7 +142,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public long getCustomerAddress(long order){
         long getCustomer = ordersDao.findOne(order).getADDRESSES_ID();
-        LOG.warn("getCustomerAddress = "+getCustomer);
+        LOG.info("getCustomerAddress = "+getCustomer);
 
         return getCustomer;
 

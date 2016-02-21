@@ -16,14 +16,12 @@ import java.util.List;
 public class CustomersController {
     public final Logger LOG = Logger.getLogger(this.getClass());
 
-
     @Autowired
     private CustomersDao customersDao;
 
     @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
     public List<CustomersEntity> getAll() {
-//        return itemsDao.findAll();
         return customersDao.findAll();
     }
 
@@ -36,11 +34,5 @@ public class CustomersController {
         }
         return customersDao.findOne(id);
     }
-
-
-
-
-
-
 
 }

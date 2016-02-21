@@ -34,5 +34,4 @@ public class ItemsController  {
         }
         return itemsDao.findOne(id);
     }
-
 }
