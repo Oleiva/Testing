@@ -12,6 +12,7 @@ public interface OrdersService {
     void addNewOrder(long customerId, long addressesId, long itemId, long amount);
     List<TransactionsEntity> getItemsByOrderId(long order);
 
+
 //    OrdersEntity addNewsOrder(long customerId, long addressesId, long itemId, String status, long amount);
 
 //    Collection<OrdersEntity> showOrder(long orderId);

@@ -84,20 +84,14 @@ public class OrdersController {
             LOG.warn("Number of orders does not exist");
         }
 
-        LOG.warn(ordersService.getItemsByOrderId(id));
-
-        //WARRN
-        ordersService.getItemsByOrderId(id);
-        orderPojo.setListOfItems(ordersService.getItemsByOrderId(id));
+//        orderPojo.setListOfItems(ordersService.getItemsByOrderId(id));
 
         ArrayList itemsIdList = new ArrayList();
-        ArrayList amountList = new ArrayList();
+//        List amountList = new ArrayList();
         ArrayList itemList = new ArrayList();
-//        ArrayList priceList = new ArrayList();
+
+        ArrayList<Long> amountList = new ArrayList<Long>();
         ArrayList<Long> priceList = new ArrayList<Long>();
-
-
-        List<TransactionsEntity> dd  = new ArrayList<>();
 
         for(TransactionsEntity el : ordersService.getItemsByOrderId(id)){
             itemsIdList.add(el.getItemId());
@@ -108,69 +102,33 @@ public class OrdersController {
         }
 
         for(int i=0;i<itemsIdList.size();i++){
-            ////////////////////////////////////////////////////////////////
-             long x = (int) Integer.parseInt(itemsIdList.get(i).toString());
-
+            long x = (int) Integer.parseInt(itemsIdList.get(i).toString());
             itemList.add(itemsDao.findOne(x).getNAME());
             LOG.warn("Name"+itemList);
             priceList.add(itemsDao.findOne(x).getPRICE());
-            LOG.warn("dd(itemsDao.findOne(x).getPRICE()" + priceList);
+            LOG.warn("## priceList" + priceList);
         }
-
-//        Array[] itemListArray = (Array[]) itemList.toArray();
-
-//          Object[] amountListArray = new long[amountList.size()];
-//          long[] priceListArray = new long[priceList.size()];
-
-        Long[] amountListArray = new Long[amountList.size()];
-        amountListArray = (Long[]) amountList.toArray();
-
-        for (Long user : amountListArray) {
-
-            System.out.println(user.toString());
-        }
-
-
-
-
-
-        Long[] priceListArray = new Long[amountList.size()];
-        priceListArray = (Long[]) priceList.toArray();
-
-        LOG.warn("amountListArray ="+amountListArray);
-        LOG.warn("priceListArray " + priceListArray);
-
-
-
-//        User[] userArray = userList.toArray(new User[userList.size()]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         long Z = 0;
+        Long Z1;
+        Long Z2;
+        for (int i = 0; i < itemList.size(); i++) {
+            LOG.warn("amount "+amountList.get(i));
+            LOG.warn("price " +priceList.get(i));
+            Z1 =  amountList.get(i);
+            Z2 =  priceList.get(i);
 
+            LOG.warn("Z1 " +Z1);
+            LOG.warn("Z2 "+Z2);
 
-        for(int i =0;i< itemList.size();i++){
-           Z = Z+ amountListArray[i]* priceListArray[i];
-            LOG.warn(Z);
+            Z = Z+ Z1*Z2;
         }
+
         LOG.warn("Z = "+Z);
 
 
                orderPojo.setListOfItems(itemList);
-                orderPojo.setCoinsTotal(Z);
+               orderPojo.setCoinsTotal(Z);
 
         return orderPojo;
     }
@@ -178,18 +136,6 @@ public class OrdersController {
 
 
 
-///// Get by ORder
-//@RequestMapping(value="/get-by-order/{id}",method = RequestMethod.GET)
-//@ResponseBody
-//public Collection<OrdersEntity> getByOrderId(@PathVariable long id,
-//                                             OrderPojo orderPojo) {
-//
-//    if (ordersDao.findOne(id) == null) {
-//        LOG.warn("Number of orders does not exist");
-//    }
-//        return ordersService.showOrder(id);
-//
-//}
 
     @RequestMapping(value="/add-new/{cust}/{adress}/{item}/{amount}",method = RequestMethod.POST)
     @ResponseBody
