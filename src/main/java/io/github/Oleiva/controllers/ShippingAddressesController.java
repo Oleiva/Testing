@@ -1,8 +1,6 @@
 package io.github.Oleiva.controllers;
 
-import io.github.Oleiva.dao.CustomersDao;
 import io.github.Oleiva.dao.ShippingAddressesDao;
-import io.github.Oleiva.entity.CustomersEntity;
 import io.github.Oleiva.entity.ShippingAddressesEntity;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,8 @@ import java.util.List;
 public class ShippingAddressesController {
     public final Logger LOG = Logger.getLogger(this.getClass());
 
-
     @Autowired
     private ShippingAddressesDao shippingAddressesDao;
-
 
     @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
@@ -34,11 +30,7 @@ public class ShippingAddressesController {
         if (shippingAddressesDao.findOne(id) == null) {
             LOG.warn("Number of customer does not exist");
         }
-//        return customersDao.findOne(id);
-        return shippingAddressesDao.findOne(id);
-
+             return shippingAddressesDao.findOne(id);
     }
-
-// find by Customer
 
 }

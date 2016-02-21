@@ -88,5 +88,4 @@ public class ItemsEntity {
         this.AMOUNT = AMOUNT;
     }
 
-
 }

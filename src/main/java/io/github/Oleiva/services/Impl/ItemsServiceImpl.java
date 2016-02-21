@@ -1,11 +1,11 @@
-package io.github.Oleiva.services;
+package io.github.Oleiva.services.Impl;
 
 import io.github.Oleiva.dao.ItemsDao;
 import io.github.Oleiva.entity.ItemsEntity;
+import io.github.Oleiva.services.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 @Transactional
@@ -36,6 +36,5 @@ public class ItemsServiceImpl implements ItemsService {
     public long getAnte(long item,long amount){
         return (itemsDao.findOne(item).getPRICE()) * amount;
     }
-
 
 }

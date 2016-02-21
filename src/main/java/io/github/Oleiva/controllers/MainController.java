@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
-
    public final Logger LOG = Logger.getLogger(this.getClass());
 
   @Autowired
@@ -33,7 +32,6 @@ public class MainController {
   @RequestMapping("/")
   @ResponseBody
   public ResponsePojo index(ResponsePojo responsePojo) {
-
     responsePojo.setMessage("Proudly handcrafted by " + "<a href='http://oleiva.github.io'>Ivasoft </a> :)");
     return responsePojo;
   }
@@ -76,7 +74,6 @@ public class MainController {
     customersService.addCustomers("Max","85gj885424@urk.net",1034344343);
     customersService.addCustomers("Oleg","858t485@4urk.net",100343430);
     customersService.addCustomers("Seaperl","852u8825@urk.net",10343400);
-
 
       responsePojo.setMessage(responsePojo.getMessage()+" All customers added. ");
 

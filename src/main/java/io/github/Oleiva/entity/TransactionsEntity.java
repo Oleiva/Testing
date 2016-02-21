@@ -4,9 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-/**
- * Created by OleIva on 19.02.2016.
- */
 @Entity
 @Table(name = "TRANSACTION")
 public class TransactionsEntity {
@@ -33,7 +30,6 @@ public class TransactionsEntity {
         this.amount = amount;
     }
 
-
     @ManyToOne(fetch = FetchType.LAZY,optional=true)
     @JoinColumn(name="orderId", nullable=false,insertable = false,updatable = false)
     private OrdersEntity ordersEntity;
@@ -44,8 +40,6 @@ public class TransactionsEntity {
 
 //    @OneToMany(mappedBy = "itemsEntity")
 //    private Set<ItemsEntity> itemsEntitySet;
-
-
 
     public long getID() {
         return ID;
