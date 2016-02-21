@@ -15,6 +15,7 @@ public class TransactionsEntity {
     private long ID;
 
     @NotNull
+
     private long orderId;
 
     @NotNull
@@ -30,7 +31,6 @@ public class TransactionsEntity {
         this.itemId = itemId;
         this.amount = amount;
     }
-
 
 
     @ManyToOne(fetch = FetchType.LAZY,optional=true)

@@ -5,14 +5,11 @@ import io.github.Oleiva.entity.TransactionsEntity;
 
 import java.util.List;
 
-/**
- * Created by OleIva on 19.02.2016.
- */
 public class OrderPojo {
 
-    private List<TransactionsEntity> listOfItems ;
-
     private long coinsTotal;
+
+    private List<TransactionsEntity> listOfItems ;
 
     public List<TransactionsEntity> getListOfItems() {
         return listOfItems;

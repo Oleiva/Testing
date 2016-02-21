@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -91,44 +92,85 @@ public class OrdersController {
 
         ArrayList itemsIdList = new ArrayList();
         ArrayList amountList = new ArrayList();
+        ArrayList itemList = new ArrayList();
+//        ArrayList priceList = new ArrayList();
+        ArrayList<Long> priceList = new ArrayList<Long>();
+
+
         List<TransactionsEntity> dd  = new ArrayList<>();
 
         for(TransactionsEntity el : ordersService.getItemsByOrderId(id)){
             itemsIdList.add(el.getItemId());
             amountList.add(el.getAmount());
 
+            LOG.warn("itemsIdList"+itemsIdList);
+            LOG.warn("amountList"+amountList);
         }
 
-        Long S = Long.getLong(itemsIdList.toArray().toString());
+        for(int i=0;i<itemsIdList.size();i++){
+            ////////////////////////////////////////////////////////////////
+             long x = (int) Integer.parseInt(itemsIdList.get(i).toString());
+
+            itemList.add(itemsDao.findOne(x).getNAME());
+            LOG.warn("Name"+itemList);
+            priceList.add(itemsDao.findOne(x).getPRICE());
+            LOG.warn("dd(itemsDao.findOne(x).getPRICE()" + priceList);
+        }
+
+//        Array[] itemListArray = (Array[]) itemList.toArray();
+
+//          Object[] amountListArray = new long[amountList.size()];
+//          long[] priceListArray = new long[priceList.size()];
+
+        Long[] amountListArray = new Long[amountList.size()];
+        amountListArray = (Long[]) amountList.toArray();
+
+        for (Long user : amountListArray) {
+
+            System.out.println(user.toString());
+        }
 
 
 
 
 
-//        LOG.warn("##"+namesList);
-//        LOG.warn("##"+lastnamesList);
+        Long[] priceListArray = new Long[amountList.size()];
+        priceListArray = (Long[]) priceList.toArray();
 
-
-//        List two = new XxxList(sub);
-//        List two = new ArrayList(sub);
-//        sub.clear();
-
-//        List<Entity> entities = getEntities();
-//        List<Integer> listIntegerEntities = Lambda.extract(entities, Lambda.on(Entity.class).getFielf1());
-
-//        List s = catnamesList.subList(2,3);
-//        List thre = new ArrayList(s);
-
-//        LOG.warn("two"+two);
-//        LOG.warn("thre"+thre);
-//        LOG.warn("s"+s);
-//        LOG.warn("sub"+sub);
+        LOG.warn("amountListArray ="+amountListArray);
+        LOG.warn("priceListArray " + priceListArray);
 
 
 
-//        sub.clear(); // since sub is backed by one, this removes all sub-list items from one
+//        User[] userArray = userList.toArray(new User[userList.size()]);
 
-                orderPojo.setCoinsTotal(100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        long Z = 0;
+
+
+        for(int i =0;i< itemList.size();i++){
+           Z = Z+ amountListArray[i]* priceListArray[i];
+            LOG.warn(Z);
+        }
+        LOG.warn("Z = "+Z);
+
+
+               orderPojo.setListOfItems(itemList);
+                orderPojo.setCoinsTotal(Z);
 
         return orderPojo;
     }
