@@ -1,6 +1,5 @@
 package io.github.Oleiva.controllers;
 
-
 import io.github.Oleiva.dao.ItemsDao;
 //import io.github.Oleiva.dto.pojo.ResponseDTO;
 import io.github.Oleiva.entity.CustomersEntity;
@@ -16,7 +15,6 @@ import java.util.List;
 @RequestMapping("/items")
 public class ItemsController  {
     public final Logger LOG = Logger.getLogger(this.getClass());
-
 
     @Autowired
     private ItemsDao itemsDao;
