@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,6 +19,8 @@ public class OrdersServiceImpl implements OrdersService {
 
    @Autowired
     private OrdersDao ordersDao;
+
+
 
     @Autowired
     private TransactionsDao transactionsDao;
@@ -106,6 +109,12 @@ public class OrdersServiceImpl implements OrdersService {
 //        return id;
 //    }
 
+    @Override
+    public List<TransactionsEntity> getItemsByOrderId(long order){
+
+        return transactionsDao.findByOrderId(order);
+
+    }
 
 
 

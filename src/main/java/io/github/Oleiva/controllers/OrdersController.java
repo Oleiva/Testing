@@ -7,6 +7,7 @@ import io.github.Oleiva.dao.ShippingAddressesDao;
 import io.github.Oleiva.dto.pojo.OrderPojo;
 import io.github.Oleiva.dto.pojo.ResponsePojo;
 import io.github.Oleiva.entity.OrdersEntity;
+import io.github.Oleiva.entity.TransactionsEntity;
 import io.github.Oleiva.services.CustomersService;
 import io.github.Oleiva.services.ItemsService;
 import io.github.Oleiva.services.OrdersService;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class OrdersController {
     @Autowired
     private OrdersService ordersService;
 
+//    @Autowired
+//    TransactionsEntity transactionsEntity;
+
 
     @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
@@ -68,6 +73,67 @@ public class OrdersController {
 //        return itemsDao.findOne(id);
         return ordersDao.findOne(id);
     }
+
+    @RequestMapping(value="/usersOrder/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public OrderPojo  usersOrder (@PathVariable long id,
+                                  OrderPojo orderPojo) {
+
+        if (ordersDao.findOne(id) == null) {
+            LOG.warn("Number of orders does not exist");
+        }
+
+        LOG.warn(ordersService.getItemsByOrderId(id));
+
+        //WARRN
+        ordersService.getItemsByOrderId(id);
+        orderPojo.setListOfItems(ordersService.getItemsByOrderId(id));
+
+        ArrayList itemsIdList = new ArrayList();
+        ArrayList amountList = new ArrayList();
+        List<TransactionsEntity> dd  = new ArrayList<>();
+
+        for(TransactionsEntity el : ordersService.getItemsByOrderId(id)){
+            itemsIdList.add(el.getItemId());
+            amountList.add(el.getAmount());
+
+        }
+
+        Long S = Long.getLong(itemsIdList.toArray().toString());
+
+
+
+
+
+//        LOG.warn("##"+namesList);
+//        LOG.warn("##"+lastnamesList);
+
+
+//        List two = new XxxList(sub);
+//        List two = new ArrayList(sub);
+//        sub.clear();
+
+//        List<Entity> entities = getEntities();
+//        List<Integer> listIntegerEntities = Lambda.extract(entities, Lambda.on(Entity.class).getFielf1());
+
+//        List s = catnamesList.subList(2,3);
+//        List thre = new ArrayList(s);
+
+//        LOG.warn("two"+two);
+//        LOG.warn("thre"+thre);
+//        LOG.warn("s"+s);
+//        LOG.warn("sub"+sub);
+
+
+
+//        sub.clear(); // since sub is backed by one, this removes all sub-list items from one
+
+                orderPojo.setCoinsTotal(100);
+
+        return orderPojo;
+    }
+
+
 
 
 ///// Get by ORder
