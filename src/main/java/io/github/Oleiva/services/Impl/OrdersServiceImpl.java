@@ -1,17 +1,15 @@
-package io.github.Oleiva.services;
+package io.github.Oleiva.services.Impl;
 
-import io.github.Oleiva.dao.ItemsDao;
 import io.github.Oleiva.dao.OrdersDao;
 import io.github.Oleiva.dao.TransactionsDao;
 import io.github.Oleiva.entity.OrdersEntity;
 import io.github.Oleiva.entity.TransactionsEntity;
+import io.github.Oleiva.services.OrdersService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -28,99 +26,26 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public void addNewOrder(long customerId, long addressesId, long itemId, long amount){
 
-
-
         OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
 
-//        LOG.warn("## orderId" +orderId);
         ordersDao.saveAndFlush(ordersEntity);
         long orderId = ordersEntity.getID();
 
-        LOG.warn("## orderId = "+ orderId);
-
-
-//        long orderId, long itemId, long amount
+        LOG.info("## orderId = "+ orderId);
 
         TransactionsEntity transactionsEntity = new TransactionsEntity(orderId, itemId, amount);
         transactionsDao.saveAndFlush(transactionsEntity);
-
-
     }
 
     @Override
     public void addExistOrder(long orderId, long itemId, long amount){
-
-
-
-//        OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
-
-//        LOG.warn("## orderId" +orderId);
-//        ordersDao.saveAndFlush(ordersEntity);
-
-//        long orderId = ordersEntity.getID();
-
-//        LOG.warn("## orderId = "+ orderId);
-
-
-//        long orderId, long itemId, long amount
-
         TransactionsEntity transactionsEntity = new TransactionsEntity( orderId,  itemId,  amount);
         transactionsDao.saveAndFlush(transactionsEntity);
-
-
     }
-
-
-
-
-
-
-
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    @Override
-//    public OrdersEntity addItemToOrder(long order, long itemId, long amount){
-//
-//
-//        long indexOfID;
-//
-//        try {
-//            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getOrderId() +1;
-//        }catch (Exception e){
-//            indexOfID = 1; //if table do not exist --> exception
-//        }
-//
-//        LOG.info("## indexOfID"+indexOfID);
-////        OrdersEntity ordersEntity = new OrdersEntity(indexOfID, customerId, addressesId,  itemId,  status,  amount);
-//        return  ordersDao.saveAndFlush(ordersEntity);
-//    }
-//
-//
-//
-
-
-
-
-
-
-
-
-//    @Override
-//    public Collection<OrdersEntity> showOrder(long orderId){
-//      return   ordersDao.findByOrderId(orderId);
-//    }
-//
-//
-//    public long getCustomerIdFromOrder(long order){
-//      long id =  Integer.parseInt(ordersDao.findByOrderId(order).toString()) ;
-//        return id;
-//    }
 
     @Override
     public List<TransactionsEntity> getItemsByOrderId(long order){
-
         return transactionsDao.findByOrderId(order);
-
     }
 
     @Override
@@ -142,12 +67,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public long getCustomerAddress(long order){
         long getCustomer = ordersDao.findOne(order).getADDRESSES_ID();
-        LOG.warn("getCustomerAddress = "+getCustomer);
-
+        LOG.info("getCustomerAddress = "+getCustomer);
         return getCustomer;
-
     }
-
-
-
 }

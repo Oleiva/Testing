@@ -10,5 +10,4 @@ public interface CustomersService {
 
     public void removeFromCredit(long cust, long ante);
 
-
 }

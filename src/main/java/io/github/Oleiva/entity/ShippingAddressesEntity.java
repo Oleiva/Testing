@@ -26,7 +26,6 @@ public class ShippingAddressesEntity {
 
     private int FLAT;
 
-
     public ShippingAddressesEntity(){}
 
     public ShippingAddressesEntity(long ID){
@@ -40,7 +39,6 @@ public class ShippingAddressesEntity {
         this.HOUSE = HOUSE;
         this.FLAT = FLAT;
     }
-
 
     public long getID() {
         return ID;

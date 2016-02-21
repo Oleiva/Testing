@@ -7,10 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.Set;
-
 
 @Entity
 @Table(name = "ORDERS")
@@ -33,7 +30,6 @@ public class OrdersEntity {
     @OneToMany(mappedBy = "ordersEntity",fetch = FetchType.EAGER)
     private Set<TransactionsEntity> getTransaction;
 
-
 //    @ManyToOne
 //    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
 //    public CustomersEntity getCustomers;
@@ -48,8 +44,6 @@ public class OrdersEntity {
         this.ADDRESSES_ID = ADDRESSES_ID;
         this.STATUS = STATUS;
     }
-
-
 
     public long getID() {
         return ID;

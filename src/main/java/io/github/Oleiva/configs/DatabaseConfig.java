@@ -91,11 +91,6 @@ public class DatabaseConfig {
     return new PersistenceExceptionTranslationPostProcessor();
   }
 
-
-  // ------------------------
-  // PRIVATE FIELDS
-  // ------------------------
-  
   @Autowired
   private Environment env;
 
@@ -105,5 +100,4 @@ public class DatabaseConfig {
   @Autowired
   private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
-
-} // class DatabaseConfig
+}

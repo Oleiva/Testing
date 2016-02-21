@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
@@ -37,11 +36,6 @@ public class OrdersController {
     @Autowired
     private ShippingAddressesDao shippingAddressesDao;
 
-//    @Autowired
-    ResponsePojo responsePojo;
-
-    OrderPojo orderPojo;
-
     @Autowired
     private ItemsService itemsService;
 
@@ -50,10 +44,6 @@ public class OrdersController {
 
     @Autowired
     private OrdersService ordersService;
-
-//    @Autowired
-//    TransactionsEntity transactionsEntity;
-
 
     @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
@@ -77,11 +67,9 @@ public class OrdersController {
     public OrderPojo  usersOrder (@PathVariable long id,
                                   OrderPojo orderPojo) {
 
-
     try{ //TODO: Refactor this
         if (ordersDao.findOne(id) == null) {
             LOG.warn("Number of orders does not exist");
-            responsePojo.setMessage("Number of orders does not exist");
         }else{
             ArrayList itemList = new ArrayList();
             ArrayList<Long> itemsIdList = new ArrayList();
@@ -92,8 +80,8 @@ public class OrdersController {
                 itemsIdList.add(el.getItemId());
                 amountList.add(el.getAmount());
 
-                LOG.warn("itemsIdList"+itemsIdList);
-                LOG.warn("amountList"+amountList);
+                LOG.info("itemsIdList" + itemsIdList);
+                LOG.info("amountList" + amountList);
             }
 
             for(int i=0;i<itemsIdList.size();i++){
@@ -114,37 +102,21 @@ public class OrdersController {
 
     }catch (Exception e){
         LOG.warn("Number of orders does not exist");
-        responsePojo.setMessage("Number of orders does not exist");
     }finally {
         return orderPojo;
     }
 
     }
 
-
     @RequestMapping(value="/add-item/{itemId}/{amount}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponsePojo  addItemToLastOrder(
-//                                         @PathVariable(value = "cust")   long cust,
-//                                         @PathVariable(value = "adress") long adress,
-                                           @PathVariable(value = "itemId")   long itemId,
-                                           @PathVariable(value = "amount") long amount,
-                                           ResponsePojo responsePojo){
+    public ResponsePojo  addItemToLastOrder( @PathVariable(value = "itemId")   long itemId,
+                                             @PathVariable(value = "amount") long amount,
+                                             ResponsePojo responsePojo){
 
-//        long lastOrderIndex;
-//        long cutomerId;
-        int swither = 0;
-
+            int swither = 0;
             long lastOrderIndex = ordersService.getLastOrder();
             long cutomerId = ordersService.getCustomerFromOrder(lastOrderIndex);
-            long adressId = ordersService.getCustomerAddress(lastOrderIndex);
-//
-//            LOG.warn("lastOrderIndex = " + lastOrderIndex);
-//            LOG.warn("cutomerId " + cutomerId);
-//            LOG.warn("adressId" + adressId);
-            swither ++;
-
-
         try{
             if (itemsDao.findOne(itemId)!=null){ // Are there items in the database ?
                 swither++;
@@ -158,7 +130,7 @@ public class OrdersController {
         }
 
         try{
-            if (swither == 2) {
+            if (swither == 1) {
                 if ( itemsService.amountItemInStock(itemId)>= amount ) { // Is there enough product in stock?
 
                     long ante = itemsService.getAnte(itemId,amount);
@@ -169,24 +141,14 @@ public class OrdersController {
 //                     Отнять столко денег              +
 //                     Создать плетеж
 //
-
                         itemsService.removeFromStock(itemId,amount);
                         customersService.removeFromCredit(cutomerId,ante);
-
-//                        long order, long customerId, long addressesId, long itemId, long amount
-//                        ordersService.addExistOrder(order, customerId, addressesId,itemId,amount);
                         ordersService.addExistOrder(lastOrderIndex,  itemId,  amount);
-
-
-
-
-
-                        responsePojo.setMessage("AlL OK. Try to bay");
+                        responsePojo.setMessage("All present and correct. Thank you for your purchase");
                     }else {
                         LOG.info("There is not enough money");
                         responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");
                     }
-
                 }else {
                     LOG.info("This position is not enough in stock");
                     responsePojo.setMessage(responsePojo.getMessage() + " This position is not enough in stock ");
@@ -194,45 +156,11 @@ public class OrdersController {
             }else{
                 responsePojo.setMessage("Some Errors occupied "+responsePojo.getMessage());
             }
-
         }catch (Exception ex){
             responsePojo.setMessage(responsePojo.getMessage()+"Exeption swither ");
         }
         return responsePojo;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @RequestMapping(value="/add-new/{cust}/{adress}/{item}/{amount}",method = RequestMethod.POST)
@@ -285,21 +213,11 @@ public class OrdersController {
          if (swither == 3) {
              if ( itemsService.amountItemInStock(item)>= amount ) { // Is there enough product in stock?
 
-//                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
                  long ante = itemsService.getAnte(item,amount);
                  if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > ante ) {
 
-//                     В один этап, без резервирования  +
-//                     Отнять столько позиций           +
-//                     Отнять столко денег              +
-//                     Создать плетеж
-//
                      itemsService.removeFromStock(item,amount);
                      customersService.removeFromCredit(cust,ante);
-//                                          |long      |long       |String |String|long  |
-//                                          |CUSTOMERID|ADDRESSESID|SKU    |STATUS|AMOUNT|
-//                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
-
                      ordersService.addNewOrder(cust,adress,item,amount);
 
                      responsePojo.setMessage("AlL OK. Try to bay");
@@ -308,7 +226,6 @@ public class OrdersController {
                      LOG.info("There is not enough money");
                      responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");
                  }
-
              }else {
                  LOG.info("This position is not enough in stock");
                  responsePojo.setMessage(responsePojo.getMessage() + " This position is not enough in stock ");
@@ -321,93 +238,7 @@ public class OrdersController {
          responsePojo.setMessage(responsePojo.getMessage()+"Exeption swither ");
      }
 
-//        responsePojo.setMessage("OK");
         return responsePojo;
     }
-
-
-//    @RequestMapping(value="/add-item-to-order/{order}/{item}/{amount}",method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponsePojo  addItemToOrder(@PathVariable(value = "order")   long order,
-//                                        @PathVariable(value = "item")   long item,
-//                                        @PathVariable(value = "amount") long amount,
-//                                        ResponsePojo responsePojo){
-//
-//
-//        int swither = 0;
-//
-//        try{
-//            long orderId = ordersService.getOrderId(order);
-//            swither ++;
-//        }catch (Exception e){
-//            LOG.info("This order not found");
-//            responsePojo.setMessage(responsePojo.getMessage()+" This order not found ");
-//        }
-//
-//        try{
-//            if (itemsDao.findOne(item)!=null){
-//                swither++;
-//                LOG.info("item was found");
-//            }else{
-//                LOG.info("item not found");
-//                responsePojo.setMessage(responsePojo.getMessage()+" Item.. not found. ");
-//            }
-//        }catch (Exception ex){
-//            responsePojo.setMessage(responsePojo.getMessage()+" Exeption item ");
-//        }
-//
-//        try{
-//            if (swither == 2) {
-//                if ( itemsService.amountItemInStock(item)>= amount ) {
-//
-////                 if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > itemsDao.findOne(item).getPRICE() *amount ){
-//                    long ante = itemsService.getAnte(item,amount);
-//                    // get customers
-//                    // get customer adress
-//
-//                    long cust = 500;
-//                    long adress = 2;
-//
-////                    ordersService.
-//
-//                    if(customersDao.findOne(cust).getAVAILABLE_CREDIT() > ante ) {
-//
-////                     В один этап, без резервирования  +
-////                     Отнять столько позиций           +
-////                     Отнять столко денег              +
-////                     Создать плетеж
-//
-//                        itemsService.removeFromStock(item,amount);
-//                        customersService.removeFromCredit(cust,ante);
-////                                          |long      |long       |String |String|long  |
-////                                          |CUSTOMERID|ADDRESSESID|SKU    |STATUS|AMOUNT|
-////                     ordersService.addOrder(cust,adress,item,"STATUS_OK",amount);
-//                        ordersService.addNewOrder(cust,adress,item,"STATUS_OK",amount);
-//
-//                        responsePojo.setMessage("AlL OK. Try to bay");
-//                    }else {
-//                        LOG.info("There is not enough money");
-//                        responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");
-//                    }
-//
-//                }else {
-//                    LOG.info("This position is not enough in stock");
-//                    responsePojo.setMessage(responsePojo.getMessage() + " This position is not enough in stock ");
-//                }
-//            }else{
-//                responsePojo.setMessage("Some Errors occupied "+responsePojo.getMessage());
-//            }
-//
-//        }catch (Exception ex){
-//            responsePojo.setMessage(responsePojo.getMessage()+"Exeption swither ");
-//        }
-//
-////        responsePojo.setMessage("OK");
-//        return responsePojo;
-//    }
-//
-
-
-
 
 }
