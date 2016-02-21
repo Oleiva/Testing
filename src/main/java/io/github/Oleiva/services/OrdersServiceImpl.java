@@ -1,5 +1,6 @@
 package io.github.Oleiva.services;
 
+import io.github.Oleiva.dao.ItemsDao;
 import io.github.Oleiva.dao.OrdersDao;
 import io.github.Oleiva.dao.TransactionsDao;
 import io.github.Oleiva.entity.OrdersEntity;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,38 +22,13 @@ public class OrdersServiceImpl implements OrdersService {
    @Autowired
     private OrdersDao ordersDao;
 
-
-
     @Autowired
     private TransactionsDao transactionsDao;
 
-    //@Autowired
-    private OrdersEntity ordersEntity;
-
-    private TransactionsEntity transactionsEntity;
+    @Override
+    public void addNewOrder(long customerId, long addressesId, long itemId, long amount){
 
 
-//    @Override
-//    public OrdersEntity addNewOrder(long customerId, long addressesId, long itemId, String status, long amount){
-//
-//        long indexOfID;
-//
-//        try {
-//            indexOfID = ordersDao.findOne(ordersDao.findLastIndex()).getOrderId() +1;
-//        }catch (Exception e){
-//            indexOfID = 1; //if table do not exist --> exception
-//        }
-//
-//        LOG.info("## indexOfID"+indexOfID);
-//        OrdersEntity ordersEntity = new OrdersEntity(indexOfID, customerId, addressesId,  itemId,  status,  amount);
-//        return  ordersDao.saveAndFlush(ordersEntity);
-//
-//
-//
-//    @Override
-        public void addNewOrder(long customerId, long addressesId, long itemId, long amount){
-
-        // Проверки выполнены, нужно покупать
 
         OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
 
@@ -69,6 +46,36 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     }
+
+    @Override
+    public void addExistOrder(long orderId, long itemId, long amount){
+
+
+
+//        OrdersEntity ordersEntity = new OrdersEntity(customerId,  addressesId, "PAID");
+
+//        LOG.warn("## orderId" +orderId);
+//        ordersDao.saveAndFlush(ordersEntity);
+
+//        long orderId = ordersEntity.getID();
+
+//        LOG.warn("## orderId = "+ orderId);
+
+
+//        long orderId, long itemId, long amount
+
+        TransactionsEntity transactionsEntity = new TransactionsEntity( orderId,  itemId,  amount);
+        transactionsDao.saveAndFlush(transactionsEntity);
+
+
+    }
+
+
+
+
+
+
+
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    @Override
@@ -113,6 +120,31 @@ public class OrdersServiceImpl implements OrdersService {
     public List<TransactionsEntity> getItemsByOrderId(long order){
 
         return transactionsDao.findByOrderId(order);
+
+    }
+
+    @Override
+    public long getLastOrder() {
+        long LastOrder =1;
+        if(ordersDao.findLastIndex() != 0){
+            LastOrder =  ordersDao.findLastIndex();
+        }else {
+            LastOrder = 1;
+        }
+        return LastOrder;
+    }
+
+    @Override
+    public long getCustomerFromOrder(long order) {
+        return ordersDao.findOne(order).getCUSTOMER_ID();
+    }
+
+    @Override
+    public long getCustomerAddress(long order){
+        long getCustomer = ordersDao.findOne(order).getADDRESSES_ID();
+        LOG.warn("getCustomerAddress = "+getCustomer);
+
+        return getCustomer;
 
     }
 
