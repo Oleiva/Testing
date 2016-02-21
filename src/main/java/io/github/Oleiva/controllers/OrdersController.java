@@ -15,9 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -60,7 +58,6 @@ public class OrdersController {
     @RequestMapping(value="",method = RequestMethod.GET)
     @ResponseBody
     public List<OrdersEntity> getAll() {
-//        return itemsDao.findAll();
         return ordersDao.findAll();
     }
 
@@ -71,67 +68,168 @@ public class OrdersController {
         if (ordersDao.findOne(id) == null) {
             LOG.warn("Number of orders does not exist");
         }
-//        return itemsDao.findOne(id);
         return ordersDao.findOne(id);
     }
+
 
     @RequestMapping(value="/usersOrder/{id}",method = RequestMethod.GET)
     @ResponseBody
     public OrderPojo  usersOrder (@PathVariable long id,
                                   OrderPojo orderPojo) {
 
+
+    try{ //TODO: Refactor this
         if (ordersDao.findOne(id) == null) {
             LOG.warn("Number of orders does not exist");
+            responsePojo.setMessage("Number of orders does not exist");
+        }else{
+            ArrayList itemList = new ArrayList();
+            ArrayList<Long> itemsIdList = new ArrayList();
+            ArrayList<Long> amountList = new ArrayList<>();
+            ArrayList<Long> priceList = new ArrayList<>();
+
+            for(TransactionsEntity el : ordersService.getItemsByOrderId(id)){
+                itemsIdList.add(el.getItemId());
+                amountList.add(el.getAmount());
+
+                LOG.warn("itemsIdList"+itemsIdList);
+                LOG.warn("amountList"+amountList);
+            }
+
+            for(int i=0;i<itemsIdList.size();i++){
+                long x = (int) Integer.parseInt(itemsIdList.get(i).toString());
+                itemList.add(itemsDao.findOne(x).getNAME());
+                priceList.add(itemsDao.findOne(x).getPRICE());
+            }
+
+            long total = 0;
+            for (int i = 0; i < itemList.size(); i++) {
+                total = total + amountList.get(i)*priceList.get(i);
+                LOG.warn("Total = "+total);
+            }
+
+            orderPojo.setListOfItems(itemList);
+            orderPojo.setCoinsTotal(total);
         }
 
-//        orderPojo.setListOfItems(ordersService.getItemsByOrderId(id));
-
-        ArrayList itemsIdList = new ArrayList();
-//        List amountList = new ArrayList();
-        ArrayList itemList = new ArrayList();
-
-        ArrayList<Long> amountList = new ArrayList<Long>();
-        ArrayList<Long> priceList = new ArrayList<Long>();
-
-        for(TransactionsEntity el : ordersService.getItemsByOrderId(id)){
-            itemsIdList.add(el.getItemId());
-            amountList.add(el.getAmount());
-
-            LOG.warn("itemsIdList"+itemsIdList);
-            LOG.warn("amountList"+amountList);
-        }
-
-        for(int i=0;i<itemsIdList.size();i++){
-            long x = (int) Integer.parseInt(itemsIdList.get(i).toString());
-            itemList.add(itemsDao.findOne(x).getNAME());
-            LOG.warn("Name"+itemList);
-            priceList.add(itemsDao.findOne(x).getPRICE());
-            LOG.warn("## priceList" + priceList);
-        }
-
-        long Z = 0;
-        Long Z1;
-        Long Z2;
-        for (int i = 0; i < itemList.size(); i++) {
-            LOG.warn("amount "+amountList.get(i));
-            LOG.warn("price " +priceList.get(i));
-            Z1 =  amountList.get(i);
-            Z2 =  priceList.get(i);
-
-            LOG.warn("Z1 " +Z1);
-            LOG.warn("Z2 "+Z2);
-
-            Z = Z+ Z1*Z2;
-        }
-
-        LOG.warn("Z = "+Z);
-
-
-               orderPojo.setListOfItems(itemList);
-               orderPojo.setCoinsTotal(Z);
-
+    }catch (Exception e){
+        LOG.warn("Number of orders does not exist");
+        responsePojo.setMessage("Number of orders does not exist");
+    }finally {
         return orderPojo;
     }
+
+    }
+
+
+    @RequestMapping(value="/add-item/{itemId}/{amount}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponsePojo  addItemToLastOrder(
+//                                         @PathVariable(value = "cust")   long cust,
+//                                         @PathVariable(value = "adress") long adress,
+                                           @PathVariable(value = "itemId")   long itemId,
+                                           @PathVariable(value = "amount") long amount,
+                                           ResponsePojo responsePojo){
+
+//        long lastOrderIndex;
+//        long cutomerId;
+        int swither = 0;
+
+            long lastOrderIndex = ordersService.getLastOrder();
+            long cutomerId = ordersService.getCustomerFromOrder(lastOrderIndex);
+            long adressId = ordersService.getCustomerAddress(lastOrderIndex);
+//
+//            LOG.warn("lastOrderIndex = " + lastOrderIndex);
+//            LOG.warn("cutomerId " + cutomerId);
+//            LOG.warn("adressId" + adressId);
+            swither ++;
+
+
+        try{
+            if (itemsDao.findOne(itemId)!=null){ // Are there items in the database ?
+                swither++;
+                LOG.info("item was found");
+            }else{
+                LOG.info("item not found");
+                responsePojo.setMessage(responsePojo.getMessage()+" Item.. not found. ");
+            }
+        }catch (Exception ex){
+            responsePojo.setMessage(responsePojo.getMessage()+" Exeption item ");
+        }
+
+        try{
+            if (swither == 2) {
+                if ( itemsService.amountItemInStock(itemId)>= amount ) { // Is there enough product in stock?
+
+                    long ante = itemsService.getAnte(itemId,amount);
+                    if(customersDao.findOne(cutomerId).getAVAILABLE_CREDIT() > ante ) {
+
+//                     В один этап, без резервирования  +
+//                     Отнять столько позиций           +
+//                     Отнять столко денег              +
+//                     Создать плетеж
+//
+
+                        itemsService.removeFromStock(itemId,amount);
+                        customersService.removeFromCredit(cutomerId,ante);
+
+//                        long order, long customerId, long addressesId, long itemId, long amount
+//                        ordersService.addExistOrder(order, customerId, addressesId,itemId,amount);
+                        ordersService.addExistOrder(lastOrderIndex,  itemId,  amount);
+
+
+
+
+
+                        responsePojo.setMessage("AlL OK. Try to bay");
+                    }else {
+                        LOG.info("There is not enough money");
+                        responsePojo.setMessage(responsePojo.getMessage() + " There is not enough money ");
+                    }
+
+                }else {
+                    LOG.info("This position is not enough in stock");
+                    responsePojo.setMessage(responsePojo.getMessage() + " This position is not enough in stock ");
+                }
+            }else{
+                responsePojo.setMessage("Some Errors occupied "+responsePojo.getMessage());
+            }
+
+        }catch (Exception ex){
+            responsePojo.setMessage(responsePojo.getMessage()+"Exeption swither ");
+        }
+        return responsePojo;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

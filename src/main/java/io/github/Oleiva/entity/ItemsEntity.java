@@ -41,13 +41,12 @@ public class ItemsEntity {
         this.AMOUNT = AMOUNT;
     }
 
-    public ItemsEntity getItemsEntity() {
-        return itemsEntity;
-    }
+//    public ItemsEntity getItemsEntity() {
+//        return itemsEntity;
+//    }
 
-    @ManyToOne(fetch = FetchType.LAZY,optional=true)
-
-    private ItemsEntity itemsEntity;
+//    @ManyToOne(fetch = FetchType.LAZY,optional=true)
+//    private ItemsEntity itemsEntity;
 
     public long getID() {
         return ID;

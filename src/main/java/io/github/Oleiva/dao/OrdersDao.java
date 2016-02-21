@@ -19,8 +19,8 @@ public interface OrdersDao  extends JpaRepository<OrdersEntity, Long> {
 //    String ww = "SELECT max(orderId) FROM orders where id = order";
 //
 //
-//    @Query(value = findLastIndex, nativeQuery = true)  long  findLastIndex();
-//    String findLastIndex = "SELECT max(id) FROM orders";
+    @Query(value = findLastIndex, nativeQuery = true)  long  findLastIndex();
+    String findLastIndex = "SELECT max(id) FROM orders";
 
 //    String findLastIndex = "SELECT max(order_id) FROM orders";
 
