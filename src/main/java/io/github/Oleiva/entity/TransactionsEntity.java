@@ -31,6 +31,15 @@ public class TransactionsEntity {
         this.amount = amount;
     }
 
+
+
+    @ManyToOne(fetch = FetchType.LAZY,optional=true)
+    @JoinColumn(name="orderId", nullable=false,insertable = false,updatable = false)
+    private OrdersEntity ordersEntity;
+
+
+
+
     public long getID() {
         return ID;
     }

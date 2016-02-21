@@ -29,6 +29,11 @@ public class OrdersEntity {
     @NotNull
     private String STATUS;
 
+//    @OneToMany(mappedBy = "ordersEntity",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ordersEntity",fetch = FetchType.EAGER)
+    private Set<TransactionsEntity> getTransaction;
+
+
 //    @ManyToOne
 //    @JoinColumn(name ="CUSTOMER_ID", insertable = false, updatable = false)
 //    public CustomersEntity getCustomers;
