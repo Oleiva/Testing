@@ -26,3 +26,4 @@ tmp/
 RUNNING_PID
 
 API.xlsx
+/doc/*.*
